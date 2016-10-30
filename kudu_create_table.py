@@ -1,4 +1,6 @@
 import kudu
+from kudu.client import Partitioning
+
 client = kudu.connect('localhost', 7051)
 
 # ========================================= Creating Columns Dict for Dummy Data =======================================
@@ -37,12 +39,11 @@ if client.table_exists('payment_history'):
     print(client.list_tables())
     client.delete_table('payment_history')
 
-    # Defining Partitioning Method
-    from kudu.client import Partitioning
-    # partitioning = Partitioning().add_hash_partitions('wallet_id', 2)
-    # partitioning = Partitioning().set_range_partition_columns(['wallet_id'])
-    partitioning = Partitioning().set_range_partition_columns([])
-    client.create_table('payment_history', schema, partitioning)
+# Defining Partitioning Method
+# partitioning = Partitioning().add_hash_partitions('wallet_id', 2)
+# partitioning = Partitioning().set_range_partition_columns(['wallet_id'])
+partitioning = Partitioning().set_range_partition_columns([])
+client.create_table('payment_history', schema, partitioning)
 
 print(schema)
 
