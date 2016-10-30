@@ -1,0 +1,5 @@
+ls -lah /kudu_fs_wall_dir/
+sudo rm -r /kudu_fs_wall_dir/*
+
+sudo kudu-master --use_hybrid_clock=false --default_num_replicas 1 --fs_wal_dir /kudu_fs_wall_dir
+sudo service kudu-tserver start
